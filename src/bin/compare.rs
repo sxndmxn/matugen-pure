@@ -10,6 +10,9 @@ use material_colors::score::Score;
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 
+// Default fallback color for missing values
+const DEFAULT_COLOR: &str = "#000000";
+
 #[derive(Parser, Debug)]
 #[command(name = "compare")]
 #[command(about = "Compare matugen output with official Material You implementation", long_about = None)]
@@ -82,55 +85,54 @@ fn extract_official_material_you(image_path: &PathBuf) -> Result<(SchemeColors, 
     let primary = ranked[0];
 
     // Generate official Material You schemes using the material-colors crate
-    let light_theme = ThemeBuilder::with_source(primary).build();
-    let dark_theme = ThemeBuilder::with_source(primary).build();
+    let theme = ThemeBuilder::with_source(primary).build();
 
     // Extract light scheme colors
     let light_scheme = SchemeColors {
-        background: argb_to_hex(light_theme.schemes.light.background),
-        surface: argb_to_hex(light_theme.schemes.light.surface),
-        on_surface: argb_to_hex(light_theme.schemes.light.on_surface),
-        on_surface_variant: argb_to_hex(light_theme.schemes.light.on_surface_variant),
-        primary: argb_to_hex(light_theme.schemes.light.primary),
-        on_primary: argb_to_hex(light_theme.schemes.light.on_primary),
-        primary_container: argb_to_hex(light_theme.schemes.light.primary_container),
-        on_primary_container: argb_to_hex(light_theme.schemes.light.on_primary_container),
-        secondary: argb_to_hex(light_theme.schemes.light.secondary),
-        on_secondary: argb_to_hex(light_theme.schemes.light.on_secondary),
-        secondary_container: argb_to_hex(light_theme.schemes.light.secondary_container),
-        tertiary: argb_to_hex(light_theme.schemes.light.tertiary),
-        on_tertiary: argb_to_hex(light_theme.schemes.light.on_tertiary),
-        tertiary_container: argb_to_hex(light_theme.schemes.light.tertiary_container),
-        error: argb_to_hex(light_theme.schemes.light.error),
-        on_error: argb_to_hex(light_theme.schemes.light.on_error),
-        error_container: argb_to_hex(light_theme.schemes.light.error_container),
-        outline: argb_to_hex(light_theme.schemes.light.outline),
-        outline_variant: argb_to_hex(light_theme.schemes.light.outline_variant),
-        surface_variant: argb_to_hex(light_theme.schemes.light.surface_variant),
+        background: argb_to_hex(theme.schemes.light.background),
+        surface: argb_to_hex(theme.schemes.light.surface),
+        on_surface: argb_to_hex(theme.schemes.light.on_surface),
+        on_surface_variant: argb_to_hex(theme.schemes.light.on_surface_variant),
+        primary: argb_to_hex(theme.schemes.light.primary),
+        on_primary: argb_to_hex(theme.schemes.light.on_primary),
+        primary_container: argb_to_hex(theme.schemes.light.primary_container),
+        on_primary_container: argb_to_hex(theme.schemes.light.on_primary_container),
+        secondary: argb_to_hex(theme.schemes.light.secondary),
+        on_secondary: argb_to_hex(theme.schemes.light.on_secondary),
+        secondary_container: argb_to_hex(theme.schemes.light.secondary_container),
+        tertiary: argb_to_hex(theme.schemes.light.tertiary),
+        on_tertiary: argb_to_hex(theme.schemes.light.on_tertiary),
+        tertiary_container: argb_to_hex(theme.schemes.light.tertiary_container),
+        error: argb_to_hex(theme.schemes.light.error),
+        on_error: argb_to_hex(theme.schemes.light.on_error),
+        error_container: argb_to_hex(theme.schemes.light.error_container),
+        outline: argb_to_hex(theme.schemes.light.outline),
+        outline_variant: argb_to_hex(theme.schemes.light.outline_variant),
+        surface_variant: argb_to_hex(theme.schemes.light.surface_variant),
     };
 
     // Extract dark scheme colors
     let dark_scheme = SchemeColors {
-        background: argb_to_hex(dark_theme.schemes.dark.background),
-        surface: argb_to_hex(dark_theme.schemes.dark.surface),
-        on_surface: argb_to_hex(dark_theme.schemes.dark.on_surface),
-        on_surface_variant: argb_to_hex(dark_theme.schemes.dark.on_surface_variant),
-        primary: argb_to_hex(dark_theme.schemes.dark.primary),
-        on_primary: argb_to_hex(dark_theme.schemes.dark.on_primary),
-        primary_container: argb_to_hex(dark_theme.schemes.dark.primary_container),
-        on_primary_container: argb_to_hex(dark_theme.schemes.dark.on_primary_container),
-        secondary: argb_to_hex(dark_theme.schemes.dark.secondary),
-        on_secondary: argb_to_hex(dark_theme.schemes.dark.on_secondary),
-        secondary_container: argb_to_hex(dark_theme.schemes.dark.secondary_container),
-        tertiary: argb_to_hex(dark_theme.schemes.dark.tertiary),
-        on_tertiary: argb_to_hex(dark_theme.schemes.dark.on_tertiary),
-        tertiary_container: argb_to_hex(dark_theme.schemes.dark.tertiary_container),
-        error: argb_to_hex(dark_theme.schemes.dark.error),
-        on_error: argb_to_hex(dark_theme.schemes.dark.on_error),
-        error_container: argb_to_hex(dark_theme.schemes.dark.error_container),
-        outline: argb_to_hex(dark_theme.schemes.dark.outline),
-        outline_variant: argb_to_hex(dark_theme.schemes.dark.outline_variant),
-        surface_variant: argb_to_hex(dark_theme.schemes.dark.surface_variant),
+        background: argb_to_hex(theme.schemes.dark.background),
+        surface: argb_to_hex(theme.schemes.dark.surface),
+        on_surface: argb_to_hex(theme.schemes.dark.on_surface),
+        on_surface_variant: argb_to_hex(theme.schemes.dark.on_surface_variant),
+        primary: argb_to_hex(theme.schemes.dark.primary),
+        on_primary: argb_to_hex(theme.schemes.dark.on_primary),
+        primary_container: argb_to_hex(theme.schemes.dark.primary_container),
+        on_primary_container: argb_to_hex(theme.schemes.dark.on_primary_container),
+        secondary: argb_to_hex(theme.schemes.dark.secondary),
+        on_secondary: argb_to_hex(theme.schemes.dark.on_secondary),
+        secondary_container: argb_to_hex(theme.schemes.dark.secondary_container),
+        tertiary: argb_to_hex(theme.schemes.dark.tertiary),
+        on_tertiary: argb_to_hex(theme.schemes.dark.on_tertiary),
+        tertiary_container: argb_to_hex(theme.schemes.dark.tertiary_container),
+        error: argb_to_hex(theme.schemes.dark.error),
+        on_error: argb_to_hex(theme.schemes.dark.on_error),
+        error_container: argb_to_hex(theme.schemes.dark.error_container),
+        outline: argb_to_hex(theme.schemes.dark.outline),
+        outline_variant: argb_to_hex(theme.schemes.dark.outline_variant),
+        surface_variant: argb_to_hex(theme.schemes.dark.surface_variant),
     };
 
     Ok((light_scheme, dark_scheme))
@@ -158,7 +160,8 @@ fn get_matugen_colors(image_path: &PathBuf, scheme_type: &str) -> Result<Value, 
     let output = Command::new(&matugen_cmd)
         .args(&[
             "image",
-            image_path.to_str().unwrap(),
+            image_path.to_str()
+                .ok_or_else(|| color_eyre::eyre::eyre!("Image path contains invalid UTF-8"))?,
             "-t",
             scheme_type,
             "--json",
@@ -191,7 +194,7 @@ fn extract_matugen_scheme(colors: &Value, mode: &str) -> SchemeColors {
             .and_then(|c| c.get(name))
             .and_then(|c| c.get(mode))
             .and_then(|c| c.as_str())
-            .unwrap_or("#000000")
+            .unwrap_or(DEFAULT_COLOR)
             .to_string()
     };
 
@@ -246,8 +249,10 @@ fn main() -> Result<(), Report> {
     println!("surface:            {} (official) vs {} (matugen)", official_dark.surface, matugen_dark.surface);
 
     // Create full comparison structure
+    let image_path = &args.image;
     let comparison = json!({
-        "image": args.image.to_str().unwrap(),
+        "image": image_path.to_str()
+            .ok_or_else(|| color_eyre::eyre::eyre!("Image path contains invalid UTF-8"))?,
         "scheme_type": args.scheme_type,
         "dark_mode": {
             "official_material_you": official_dark,
