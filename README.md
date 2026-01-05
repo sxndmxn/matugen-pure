@@ -147,66 +147,6 @@ yay -S matugen-bin
 
 <h4>
      <sub>
-          <img  src="https://cdn.simpleicons.org/nixos/white"
-           height="20"
-           width="20">
-     </sub>
-     NixOS
-     <a href="https://repology.org/project/matugen/versions">
-  <img src="https://repology.org/badge/version-for-repo/nix_stable_24_05/matugen.svg?header=" alt="nixpkgs" align="right">
-     </a><a href="j"><img alt="NixOS Version" src="https://img.shields.io/badge/git-brightgreen" align="right"></a>
-</h4>
-
-<details><summary>Click to expand</summary>
-<p>
-
-Add matugen to your flake inputs:
-```nix
-inputs = {
-  matugen = {
-    url = "github:/InioX/Matugen";
-    # If you need a specific version:
-    ref = "refs/tags/matugen-v0.10.0";
-  };
-  # ...
-};
-```
-
-Then you can add it to your packages:
-```nix
-let
-  system = "x86_64-linux";
-in {
-  environment.systemPackages = with pkgs; [    
-    # ...
-    inputs.matugen.packages.${system}.default
-  ];
-}
-```
-
-This flake also provides a NixOS/Home Manager module, which can be imported by
-adding this in your configuration:
-```nix
-{pkgs, inputs, ...}: {
-  imports = [
-    inputs.matugen.nixosModules.default
-  ];
-
-  # ...
-}
-```
-
-The module does NOT automatically symlink the files. For an example of using this module with Home Manager, see https://github.com/InioX/matugen/issues/28
-
-Option details can be found by reading the [module](./module.nix). A
-[search.nixos.org](https://search.nixos.org/options)-like option viewer is
-planned.
-
-</p>
-</details>
-
-<h4>
-     <sub>
           <img  src="https://cdn.simpleicons.org/netbsd/white"
            height="20"
            width="20">

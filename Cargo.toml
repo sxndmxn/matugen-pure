@@ -5,7 +5,7 @@ authors = ["InioX"]
 description = "A material you color generation tool with templates"
 repository = "https://github.com/InioX/matugen"
 categories = ["command-line-utilities"]
-exclude = ["default.nix", "flake.nix", "shell.nix", "example/*"]
+exclude = ["example/*"]
 license = "GPL-2.0"
 edition = "2021"
 
