@@ -185,6 +185,27 @@ make install
 
 <h2>
      <sub>
+          <img  src="https://github.com/InioX/matugen/assets/81521595/223f698f-9e72-430b-9a75-c9892fcea94e"
+           height="25"
+           width="25">
+     </sub>
+     Development Tools
+</h2>
+
+#### Material You Comparison Tool
+
+A Rust-based tool for comparing matugen output with the official Material You implementation. See [COMPARE.md](COMPARE.md) for details.
+
+```bash
+# Build the comparison tool
+cargo build --release --bin compare
+
+# Run comparison
+./target/release/compare path/to/image.png
+```
+
+<h2>
+     <sub>
           <img  src="https://github.com/InioX/matugen/assets/81521595/bafdef83-4122-4bfd-9a30-98a5e0d7e488"
            height="25"
            width="25">

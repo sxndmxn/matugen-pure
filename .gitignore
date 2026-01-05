@@ -19,8 +19,10 @@ target/
 # Generated files with matugen using the example config
 example/a/*
 
-# Node stuff
+# Node stuff (no longer used but keeping for historical purposes)
 node_modules/
 dist/
 build/
+
+# Comparison tool output
 material-comparison*
