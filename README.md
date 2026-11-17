@@ -1,3 +1,6 @@
+This repository is a personal copy of [InioX/matugen](https://github.com/InioX/matugen), maintained as a GitHub fork.
+The documentation below describes the original project.
+
 <div align="center">
      <img src="https://github.com/InioX/matugen/assets/81521595/66cfec75-702c-4b55-83fc-c474de171057" width=55% height=55%>
      <br><br>
@@ -154,7 +157,7 @@ yay -S matugen-bin
      NixOS
      <a href="https://repology.org/project/matugen/versions">
   <img src="https://repology.org/badge/version-for-repo/nix_stable_24_05/matugen.svg?header=" alt="nixpkgs" align="right">
-     </a><a href="j"><img alt="NixOS Version" src="https://img.shields.io/badge/git-brightgreen" align="right"></a>
+     </a><a href="https://github.com/InioX/matugen"><img alt="NixOS Version" src="https://img.shields.io/badge/git-brightgreen" align="right"></a>
 </h4>
 
 <details><summary>Click to expand</summary>
